@@ -1,0 +1,12 @@
+[Unit]
+Description=Chippy Buttons
+After=multi-user.target network.target
+
+[Service]
+Type=idle
+Restart=on-failure
+RestartSec=10s
+ExecStart=/usr/bin/python3 /share/chippy-buttons/src/main.py  > /home/pi/chippy-buttons.log 2>&1
+
+[Install]
+WantedBy=multi-user.target
