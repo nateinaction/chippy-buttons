@@ -22,14 +22,16 @@ play(AudioSegment.from_file("/share/chippy-buttons/startup.m4a"))
 
 def play_phrase_from_category(phrase_category):
     # Choose random phrase from category
-    phrase = phrase_files[category][
+    phrase_file = phrase_files[category][
         random.randint(0, len(phrase_files[category]) - 1)
-    ]    
-    play(AudioSegment.from_file(phrase))
+    ]
+    print("Playing phrase file: " + phrase_file)
+    play(AudioSegment.from_file(phrase_file))
 
 
 def populate_phrase_files():
     # Populate phrase_files with phrases
+    print("Populating phrase files...")
     for phrase_category in phrase_categories:
         phrase_files[phrase_category] = []
         for phrase_file in os.listdir(phase_path + phrase_category):
@@ -48,7 +50,7 @@ while True:
         # Call is_touched and pass it then number of the input.  If it's touched
         # it will return True, otherwise it will return False.
         if mpr121[i].value:
-            print("Input {} touched!".format(i))
+            category = "unassigned"
             if i == 0:
                 category = "attention"
                 play_phrase_from_category(category)
@@ -61,9 +63,10 @@ while True:
             elif i == 3:
                 category = "water"
                 play_phrase_from_category(category)
+            print("Detected input {} \"{}\"".format(i, category))
 
     # Small delay to keep from spamming output messages.
-    seconds_increment = 0.25
+    seconds_increment = 0.1
 
     # Check for new phrases every 60 seconds
     phrase_population_counter += seconds_increment
