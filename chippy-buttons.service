@@ -1,14 +1,7 @@
 [Unit]
 Description=Chippy Buttons
-Wants=sound.target multi-user.target
-After=sound.target multi-user.target
+After=sound.target
 
 [Service]
 Type=simple
-User=pi
-Restart=on-failure
-RestartSec=10s
 ExecStart=/usr/bin/python3 /share/chippy-buttons/src/main.py  > /home/pi/chippy-buttons.log 2>&1
-
-[Install]
-WantedBy=multi-user.target
