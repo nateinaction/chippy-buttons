@@ -14,10 +14,7 @@ Requires:
 
 Copy the systemd service file into location and enable it:
 ```sh
-sudo cp chippy-buttons.service /lib/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl enable chippy-buttons.service
-sudo reboot
+sh install.sh
 ```
 
 ## Check on status of service
